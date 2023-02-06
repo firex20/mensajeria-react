@@ -35,6 +35,14 @@ class Buzon {
         return $salientes;
     }
 
+    public function toArray () {
+        $a = array();
+        foreach ($this->mensajes as $mensaje) {
+            array_push($a, $mensaje->toArray());
+        }
+        return $a;
+    }
+
     public function limpiar() {
         unset($this->mensajes);
         $this->mensajes = array();

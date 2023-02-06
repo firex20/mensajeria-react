@@ -2,10 +2,12 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import React, { useState } from 'react';
+import { Alert } from 'react-bootstrap';
 
-const Identificacion = () => {
+const Identificacion = ({onIdentificar}) => {
 
     const [visible, setVisible] = useState(true);
+    const [error, setError] = useState(false);
 
     const cerrar = () => {
         setVisible(false);
@@ -15,7 +17,7 @@ const Identificacion = () => {
         let nombre = document.getElementById("nombre").value;
         let clave = document.getElementById("clave").value;
 
-        let usuario = {
+        var usuario = {
             nombre: nombre,
             clave: clave,
             nombreCompleto: ''
@@ -28,8 +30,14 @@ const Identificacion = () => {
         fetch('http://localhost:8000/index.php', requestOptions)
             .then(response => response.json())
             .then(datos => {
-                alert(datos.respuesta);
+                if (datos.respuesta === true) {
+                    cerrar();
+                    onIdentificar(datos.usuario);
+                }else{
+                    setError(true);
+                }
             });
+        
     }
 
     return (
@@ -42,6 +50,13 @@ const Identificacion = () => {
             <Modal.Header closeButton>
                 <Modal.Title>Identificacion</Modal.Title>
             </Modal.Header>
+            {
+                error && <Alert key='danger' variant='danger'>
+                            This is a danger alert with
+                        <Alert.Link href="#">an example link</Alert.Link>. Give it a click if
+                            you like.
+                        </Alert>
+            }
             <Modal.Body>
                 <Form>
                   <Form.Group className="mb-3" controlId="nombre">

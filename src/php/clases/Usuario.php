@@ -45,6 +45,12 @@
         public function getBuzon() {
             return $this->buzon;
         }
+
+        public function toArray() {
+            $a = get_object_vars($this);
+            $a["buzon"]=$this->buzon->toArray();
+            return ($a);
+        }
     }
 
 ?>

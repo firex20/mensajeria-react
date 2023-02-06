@@ -33,7 +33,6 @@
             $usuario->getBuzon()->limpiar();
             $login = $usuario->getNombre();
             $sql = "select * from mensajes where destinatario='$login' or remitente='$login'";
-            echo "<div>$sql</div>";
             $resultado = $this->conexion->query($sql);
             $tupla = $resultado->fetch_assoc();
             while ($tupla != null) {
