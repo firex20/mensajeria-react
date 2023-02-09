@@ -8,10 +8,11 @@
     $datos = json_decode(file_get_contents("php://input"), true);
     $accion = $datos['accion'];
 
+    $usuarioDB = new UsuarioDB();
+
     switch ($accion) {
         case 'acceder':
             $usuario = new Usuario($datos["usuario"]);
-            $usuarioDB = new UsuarioDB();
             $exito = $usuarioDB->comprueba($usuario);
             if ($exito) {
                 $usuarioDB->leerMensajes($usuario);
@@ -19,15 +20,26 @@
             $respuesta = array("respuesta" => $exito, "usuario" => $usuario->toArray());
             echo json_encode($respuesta);
             break;
+        case 'leerdestinatarios':
+            $usuario = new Usuario($datos["usuario"]);
+            $destinatarios = $usuarioDB->leerDestinatarios($usuario);
+            $a = array();
+            foreach ($destinatarios as $destinatario) {
+                array_push($a, $destinatario->getObjectVars());
+            };
+            echo json_encode($a);
+            break;
+        case "enviarmensaje":
+            $mensaje=new Mensaje($datos["mensaje"]);
+            $exito=$usuarioDB->enviarMensaje($mensaje);
+            $json = array("exito" => $exito);
+            echo json_encode($json);
+            break;
+        default:
+            $error = array ('error' => 'error');
+            echo json_encode($error);
+            break;
     }
-
-    $prueba=array("nombre" => "pepe", "clave" => "1234");
-    $usuario = new Usuario($prueba);
-            $usuarioDB = new UsuarioDB();
-            $exito = $usuarioDB->comprueba($usuario);
-            if ($exito) {
-                $usuarioDB->leerMensajes($usuario);
-            }
-            $respuesta = array("respuesta" => $exito, "usuario" => $usuario->toArray());
-            return (json_encode($respuesta));
+    
+    $usuarioDB->cerrar();
 ?>

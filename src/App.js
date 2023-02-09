@@ -9,9 +9,8 @@ function App() {
   const [usuario, setUsuario] = useState(null);
   const [mensajesVisibles, setMensajesVisibles] = useState(false);
 
-  function identificar(usuario) {
-    alert("identificando a "+usuario.nombre);
-    setUsuario(usuario);
+  function identificar(user) {
+    setUsuario(user);
     setMensajesVisibles(true);
   }
   return (

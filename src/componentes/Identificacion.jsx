@@ -52,9 +52,7 @@ const Identificacion = ({onIdentificar}) => {
             </Modal.Header>
             {
                 error && <Alert key='danger' variant='danger'>
-                            This is a danger alert with
-                        <Alert.Link href="#">an example link</Alert.Link>. Give it a click if
-                            you like.
+                            Usuario/Contraseña incorrectos.
                         </Alert>
             }
             <Modal.Body>
