@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Alert } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const Redactar = ({usuario}) => {
+const Redactar = ({usuario, onEnviar}) => {
 
   const [destinatarios, setDestinatarios] = useState([]);
-  const [exito, setExito] = useState(null);
 
   useEffect(() => {
     var user = {
@@ -27,36 +25,8 @@ const Redactar = ({usuario}) => {
             })
    }, [usuario]);
 
-   function enviarMensaje() {
-
-    let destinatario = document.getElementById("destinatario").value;
-    let asunto = document.getElementById("asunto").value;
-    let cuerpo = document.getElementById("cuerpo").value;
-
-    const mensaje = {
-      remitente:usuario.nombre,
-      destinatario: destinatario,
-      asunto: asunto,
-      cuerpo: cuerpo
-    }
-
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({ accion: 'enviarmensaje', mensaje: mensaje })
-    }
-
-    fetch('http://localhost:8000/index.php', requestOptions)
-            .then(response => response.json())
-            .then(datos => {
-              setExito(datos.exito);
-            })
-   }
-
     return (
       <Form>
-        {exito && <Alert key="success" variant="success" dismissible>El mensaje se ha enviado con exito</Alert>}
-        {exito === false && <Alert key="danger" variant="danger" dismissible>El mensaje no se ha podido enviar</Alert>}
       <Form.Group controlId="destinatario">
         <Form.Label>Destinatario</Form.Label>
         <Form.Select>
@@ -76,7 +46,19 @@ const Redactar = ({usuario}) => {
         <Form.Control as="textarea" placeholder="Escribe el mensaje" />
       </Form.Group>
 
-      <Button variant="primary" onClick={enviarMensaje}>
+      <Button variant="primary" onClick={function (){
+          let destinatario = document.getElementById("destinatario").value;
+          let asunto = document.getElementById("asunto").value;
+          let cuerpo = document.getElementById("cuerpo").value;
+        
+          const mensaje = {
+            remitente:usuario.nombre,
+            destinatario: destinatario,
+            asunto: asunto,
+            cuerpo: cuerpo
+          }
+          onEnviar(mensaje);
+        }}>
         Enviar mensaje
       </Button>
     </Form>

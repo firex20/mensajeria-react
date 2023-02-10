@@ -16,7 +16,7 @@ function App() {
   return (
     <Container>
       <Identificacion onIdentificar={identificar}/>
-      <Mensajes show={mensajesVisibles} usuario={usuario}/>
+      {usuario && <Mensajes show={mensajesVisibles} usuario={usuario}/>}
     </Container>
   );
 }

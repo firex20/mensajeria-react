@@ -35,6 +35,18 @@
             $json = array("exito" => $exito);
             echo json_encode($json);
             break;
+        case "leermensajes":
+            $usuario = new Usuario($datos["usuario"]);
+            $usuarioDB->leerMensajes($usuario);
+            $a = $usuario->getBuzon()->toArray();
+            echo json_encode($a);
+            break;
+        case "borrarmensaje":
+            $id=$datos["id"];
+            $exito=$usuarioDB->borrarMensaje($id);
+            $json = array("exito" => $exito);
+            echo json_encode($json);
+            break;
         default:
             $error = array ('error' => 'error');
             echo json_encode($error);

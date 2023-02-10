@@ -1,8 +1,8 @@
 import { Table, Button } from "react-bootstrap";
 
-const Entrantes = ({usuario}) => {
+const Entrantes = ({mensajes, login}) => {
 
-    let entrantes = usuario.buzon.filter(mensaje => mensaje.remitente.toLowerCase() !== usuario.nombre.toLowerCase());
+    let entrantes = mensajes.filter(mensaje => mensaje.remitente.toLowerCase() !== login.toLowerCase());
 
     return (
         <Table striped bordered hover>
