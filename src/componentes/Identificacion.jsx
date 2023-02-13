@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { Alert } from 'react-bootstrap';
 
-const Identificacion = ({onIdentificar}) => {
+const Identificacion = ({onIdentificar, url}) => {
 
     const [visible, setVisible] = useState(true);
     const [error, setError] = useState(false);
@@ -27,7 +27,7 @@ const Identificacion = ({onIdentificar}) => {
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({ accion: 'acceder', usuario: usuario })
         };
-        fetch('http://localhost:8000/index.php', requestOptions)
+        fetch(url, requestOptions)
             .then(response => response.json())
             .then(datos => {
                 if (datos.respuesta === true) {

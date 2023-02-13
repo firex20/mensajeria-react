@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const Redactar = ({usuario, onEnviar}) => {
+const Redactar = ({url, usuario, onEnviar}) => {
 
   const [destinatarios, setDestinatarios] = useState([]);
 
@@ -18,12 +18,12 @@ const Redactar = ({usuario, onEnviar}) => {
       body: JSON.stringify({ accion: 'leerdestinatarios', usuario: user })
     };
 
-    fetch('http://localhost:8000/index.php', requestOptions)
+    fetch(url, requestOptions)
             .then(response => response.json())
             .then(datos => {
               setDestinatarios(datos);
             })
-   }, [usuario]);
+   }, [usuario, url]);
 
     return (
       <Form>

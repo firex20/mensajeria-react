@@ -5,7 +5,7 @@ import VistaMensajes from './VistaMensajes';
 import Alerta from './Alerta';
 import { useState } from 'react';
 
-const Mensajes = ({show, usuario}) => {
+const Mensajes = ({url, show, usuario}) => {
 
     const objAlerta = {
         visible:false,
@@ -25,7 +25,7 @@ const Mensajes = ({show, usuario}) => {
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({ accion: 'borrarmensaje', id: id })
         }
-        fetch('http://localhost:8000/index.php', requestOptions)
+        fetch(url, requestOptions)
                 .then(response => response.json())
                 .then(datos => {
                     let objAlerta = {};
@@ -56,7 +56,7 @@ const Mensajes = ({show, usuario}) => {
             body: JSON.stringify({ accion: 'leermensajes', usuario: usuarioSimple })
         }
 
-        fetch('http://localhost:8000/index.php', requestOptions)
+        fetch(url, requestOptions)
                 .then(response => response.json())
                 .then(datos => {
                     setMensajes(datos);
@@ -71,7 +71,7 @@ const Mensajes = ({show, usuario}) => {
           body: JSON.stringify({ accion: 'enviarmensaje', mensaje: mensaje })
         }
     
-        fetch('http://localhost:8000/index.php', requestOptions)
+        fetch(url, requestOptions)
                 .then(response => response.json())
                 .then(datos => {
                     let objAlerta = {};
@@ -113,7 +113,7 @@ const Mensajes = ({show, usuario}) => {
             }} tipo="salientes"/>
         </Tab>
         <Tab eventKey="Redactar" title="Redactar">
-            <Redactar usuario={usuario} onEnviar={enviarMensaje}/>
+            <Redactar url={url} usuario={usuario} onEnviar={enviarMensaje}/>
         </Tab>
       </Tabs></div>
                 

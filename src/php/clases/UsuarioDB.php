@@ -3,12 +3,20 @@
     class UsuarioDB {
 
         private $conexion;
-        private $servidor = "localhost";
-        private $usuariodb = "root";
-        private $clave = "";
-        private $basedatos = "mensajeria";
+        private $servidor;
+        private $usuariodb;
+        private $clave;
+        private $basedatos;
+
+        
         
         public function __construct() {
+            $conf = parse_ini_file("conexion.ini");
+            $this->servidor = $conf['servidor'];
+            $this->usuariodb = $conf['usuario'];
+            $this->clave = $conf['clave'];
+            $this->basedatos = $conf['basedatos'];
+
             $this->conexion = new mysqli($this->servidor, $this->usuariodb, $this->clave, $this->basedatos);
             if($this->conexion->connect_error == true) {
                 die("Error de conexion".$this->conexion->connect_error);
