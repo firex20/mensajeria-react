@@ -19,7 +19,7 @@
 
             $this->conexion = new mysqli($this->servidor, $this->usuariodb, $this->clave, $this->basedatos);
             if($this->conexion->connect_error == true) {
-                die("Error de conexion".$this->conexion->connect_error);
+                die("Error de conexion".$this->conexion->connect_error.":".$this->conexion->connect_errno);
             }
         }
 
