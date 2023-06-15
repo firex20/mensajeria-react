@@ -20,14 +20,14 @@ const VistaMensajes = ({mensajes, onBorrar, tipo}) => {
           <th></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="mensajestable">
         {mensajes.map((mensaje, k) => (
             <tr key={k}>
                 {tipo === 'entrantes' &&<td>{mensaje.remitente}</td>}
                 {tipo === 'salientes' &&<td>{mensaje.destinatario}</td>}
                 <td>{mensaje.asunto}</td>
                 <td>{mensaje.cuerpo}</td>
-                <td><Button variant="primary" onClick={() => {
+                <td className="borrarbutton"><Button variant="primary" onClick={() => {
                   setVisibleConfirmar(true);
                   setId(mensaje.id);
                 }}>Borrar mensaje</Button></td>

@@ -4,13 +4,13 @@ import { Form } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { Alert } from 'react-bootstrap';
 
-const Identificacion = ({onIdentificar, url}) => {
+const Identificacion = ({onIdentificar, url, iden, setIden, setSpiner}) => {
 
-    const [visible, setVisible] = useState(true);
     const [error, setError] = useState(false);
 
     const cerrar = () => {
-        setVisible(false);
+        setIden(false);
+        setSpiner(false);
     }
 
     const acceder = () => {
@@ -33,6 +33,7 @@ const Identificacion = ({onIdentificar, url}) => {
                 if (datos.respuesta === true) {
                     cerrar();
                     onIdentificar(datos.usuario);
+                    setError(false);
                 }else{
                     setError(true);
                 }
@@ -42,7 +43,7 @@ const Identificacion = ({onIdentificar, url}) => {
 
     return (
         <Modal
-        show={visible}
+        show={iden}
         onHide={cerrar}
         backdrop="static"
         keyboard={false}

@@ -1,0 +1,94 @@
+#title {
+    float: right;
+    margin-right: 24%;
+    margin-top: 0.4%;
+    margin-bottom: 0;
+    font-size: larger;
+    font-weight: bold;
+    font-style: italic;
+    color: whitesmoke;
+    text-shadow: black 2px 2px;
+}
+
+.tabs {
+    background-color: rgb(159, 228, 255);
+}
+
+#menu li {
+    background-color: white;
+}
+
+#menu ul li:nth-child(1) {
+    border-top-left-radius: 8px;
+}
+
+#menu ul li:nth-last-child(1) {
+    border-top-right-radius: 8px;
+}
+
+#menu {
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+#menu table, #menu form {
+    background-color: white;
+}
+
+.redact {
+    padding: 15px;
+}
+
+#logoutbutton {
+    float: right;
+    background-color: white; 
+    height: 42px;
+    box-shadow: none;
+    border: 1px solid lightgray;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: rgb(44, 110, 253);
+    font-size: medium;
+}
+
+#logoutbutton:hover {
+    color: rgb(28, 65, 145);
+    background-color: azure;
+}
+
+#cuerpo {
+    height: 200px;
+}
+
+.borrarbutton {
+    text-align: center;
+}
+
+#mensajestable tr td:nth-child(1) {
+    width: 12%;
+}
+
+#mensajestable tr td:nth-child(2) {
+    width: 15%;
+}
+
+#mensajestable tr td:nth-child(3) {
+    width: 58%;
+    max-height: 10px;
+}
+
+#initsession {
+    margin-left: 30.2vw;
+    margin-top: 10vw;
+}
+
+#loadingspiner {
+    width: 30vw; 
+    height: 30vw; 
+    margin-left: 18.7vw;
+    margin-top: 6vw;
+}
+
+body {
+    background-color: rgb(159, 228, 255);
+}

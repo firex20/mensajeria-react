@@ -5,12 +5,13 @@ const Salientes = ({mensajes, login}) => {
     let salientes = mensajes.filter(mensaje => mensaje.remitente.toLowerCase() === login.toLowerCase());
 
     return (
-        <Table striped bordered hover>
+    <Table striped bordered hover>
       <thead>
         <tr>
           <th>Destinatario</th>
           <th>Asunto</th>
           <th>Cuerpo</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

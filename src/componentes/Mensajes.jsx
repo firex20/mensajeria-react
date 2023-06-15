@@ -5,7 +5,7 @@ import VistaMensajes from './VistaMensajes';
 import Alerta from './Alerta';
 import { useState } from 'react';
 
-const Mensajes = ({url, show, usuario}) => {
+const Mensajes = ({url, show, usuario, closeSession}) => {
 
     const objAlerta = {
         visible:false,
@@ -93,29 +93,33 @@ const Mensajes = ({url, show, usuario}) => {
 
     return (
         show && 
-        <div>
-        <Alerta alerta={alerta} texto={alerta} onCerrar={() => {
-            setAlerta(objAlerta);
-        }}/>
-        <Tabs
-        defaultActiveKey="Entrantes"
-        id="uncontrolled-tab-example"
-        className="mb-3"
-      >
-        <Tab eventKey="Entrantes" title="Entrantes">
-            <VistaMensajes mensajes={entrantes} onBorrar={function (id) {
-                borrarMensaje(id);
-            }} tipo="entrantes"/>
-        </Tab>
-        <Tab eventKey="Salientes" title="Salientes">
-            <VistaMensajes mensajes={salientes} onBorrar={function (id) {
-                borrarMensaje(id);
-            }} tipo="salientes"/>
-        </Tab>
-        <Tab eventKey="Redactar" title="Redactar">
-            <Redactar url={url} usuario={usuario} onEnviar={enviarMensaje}/>
-        </Tab>
-      </Tabs></div>
+        <div id='menu'>
+            <Alerta alerta={alerta} texto={alerta} onCerrar={() => {
+                setAlerta(objAlerta);
+            }}/>
+            <button onClick={closeSession} id='logoutbutton'>Cerrar sesión</button>
+            <p id='title'>Mensajeria React-Php</p>
+            <Tabs
+            defaultActiveKey="Entrantes"
+            id="uncontrolled-tab-example"
+            className="tabs"
+            >
+                <Tab className='tab' eventKey="Entrantes" title="Entrantes">
+                    <VistaMensajes mensajes={entrantes} onBorrar={function (id) {
+                        borrarMensaje(id);
+                    }} tipo="entrantes"/>
+                </Tab>
+                <Tab className='tab' eventKey="Salientes" title="Salientes">
+                    <VistaMensajes mensajes={salientes} onBorrar={function (id) {
+                        borrarMensaje(id);
+                    }} tipo="salientes"/>
+                </Tab>
+                <Tab className='tab' eventKey="Redactar" title="Redactar">
+                    <Redactar url={url} usuario={usuario} onEnviar={enviarMensaje}/>
+                </Tab>
+                
+            </Tabs>
+        </div>
                 
     );
 }

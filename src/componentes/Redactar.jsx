@@ -26,7 +26,7 @@ const Redactar = ({url, usuario, onEnviar}) => {
    }, [usuario, url]);
 
     return (
-      <Form>
+      <Form className='redact'>
       <Form.Group controlId="destinatario">
         <Form.Label>Destinatario</Form.Label>
         <Form.Select>
@@ -58,6 +58,9 @@ const Redactar = ({url, usuario, onEnviar}) => {
             cuerpo: cuerpo
           }
           onEnviar(mensaje);
+
+          document.getElementById("asunto").value = "";
+          document.getElementById("cuerpo").value = "";
         }}>
         Enviar mensaje
       </Button>
