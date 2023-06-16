@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const Redactar = ({url, usuario, onEnviar}) => {
+const Redactar = ({url, usuario, onEnviar, alerta, setAlerta}) => {
 
   const [destinatarios, setDestinatarios] = useState([]);
 
@@ -25,6 +25,47 @@ const Redactar = ({url, usuario, onEnviar}) => {
             })
    }, [usuario, url]);
 
+    const enviarMensaje = useCallback(() => {
+      let destinatario = document.getElementById("destinatario").value;
+      let asunto = document.getElementById("asunto").value;
+      let cuerpo = document.getElementById("cuerpo").value;
+      
+      const mensaje = {
+        remitente:usuario.nombre,
+        destinatario: destinatario,
+        asunto: asunto,
+        cuerpo: cuerpo
+      }
+
+      if (mensaje.asunto !== "") {
+        onEnviar(mensaje);
+      } else {
+        let objAlerta = {
+          visible:true,
+          texto:'Es necesario un asunto para el mensaje.'
+        }
+        setAlerta(objAlerta);
+      }
+
+      document.getElementById("asunto").value = "";
+      document.getElementById("cuerpo").value = "";
+    },[onEnviar, usuario.nombre, setAlerta])
+
+   useEffect(() => {
+    const keyDownHandler = event => {
+      if (event.key === 'Enter' && alerta.visible === false) {
+        event.preventDefault();
+        enviarMensaje();
+      }
+    };
+
+    document.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
+  }, [enviarMensaje, alerta.visible]);  
+
     return (
       <Form className='redact'>
       <Form.Group controlId="destinatario">
@@ -46,22 +87,7 @@ const Redactar = ({url, usuario, onEnviar}) => {
         <Form.Control as="textarea" placeholder="Escribe el mensaje" />
       </Form.Group>
 
-      <Button variant="primary" onClick={function (){
-          let destinatario = document.getElementById("destinatario").value;
-          let asunto = document.getElementById("asunto").value;
-          let cuerpo = document.getElementById("cuerpo").value;
-        
-          const mensaje = {
-            remitente:usuario.nombre,
-            destinatario: destinatario,
-            asunto: asunto,
-            cuerpo: cuerpo
-          }
-          onEnviar(mensaje);
-
-          document.getElementById("asunto").value = "";
-          document.getElementById("cuerpo").value = "";
-        }}>
+      <Button variant="primary" onClick={enviarMensaje}>
         Enviar mensaje
       </Button>
     </Form>

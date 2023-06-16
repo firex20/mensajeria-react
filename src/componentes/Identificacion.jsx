@@ -1,20 +1,20 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Alert } from 'react-bootstrap';
 
 const Identificacion = ({onIdentificar, url, iden, setIden, setSpiner}) => {
 
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(false); 
 
-    const cerrar = () => {
+    const cerrar = useCallback(() => {
         setIden(false);
         setSpiner(false);
-    }
+    },[setIden, setSpiner])
 
-    const acceder = () => {
-        let nombre = document.getElementById("nombre").value;
+    const acceder = useCallback(() => {
+        let nombre = document.getElementById("nombre").value.toLowerCase();
         let clave = document.getElementById("clave").value;
 
         var usuario = {
@@ -39,7 +39,22 @@ const Identificacion = ({onIdentificar, url, iden, setIden, setSpiner}) => {
                 }
             });
         
-    }
+    },[cerrar, onIdentificar, url])
+
+    useEffect(() => {
+        const keyDownHandler = event => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            acceder();
+          }
+        };
+    
+        document.addEventListener('keydown', keyDownHandler);
+    
+        return () => {
+          document.removeEventListener('keydown', keyDownHandler);
+        };
+      }, [acceder]);   
 
     return (
         <Modal

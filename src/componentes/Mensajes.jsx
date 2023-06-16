@@ -72,23 +72,23 @@ const Mensajes = ({url, show, usuario, closeSession}) => {
         }
     
         fetch(url, requestOptions)
-                .then(response => response.json())
-                .then(datos => {
-                    let objAlerta = {};
-                    if (datos.exito) {
-                        objAlerta = {
-                            visible:true,
-                            texto:'Mensaje enviado con exito'
-                        }
-                    }else{
-                        objAlerta = {
-                            visible:true,
-                            texto:'Error al enviar el mensaje'
-                        }
-                    }
-                    setAlerta(objAlerta);
-                    leerMensajes(usuario);
-                })
+        .then(response => response.json())
+        .then(datos => {
+            let objAlerta = {};
+            if (datos.exito) {
+                objAlerta = {
+                    visible:true,
+                    texto:'Mensaje enviado con exito'
+                }
+            }else{
+                objAlerta = {
+                    visible:true,
+                    texto:'Error al enviar el mensaje'
+                }
+            }
+            setAlerta(objAlerta);
+            leerMensajes(usuario);
+        })
     }
 
     return (
@@ -98,6 +98,7 @@ const Mensajes = ({url, show, usuario, closeSession}) => {
                 setAlerta(objAlerta);
             }}/>
             <button onClick={closeSession} id='logoutbutton'>Cerrar sesión</button>
+            <p id='user'>¡Bienvenido, {usuario.nombre}!</p>
             <p id='title'>Mensajeria React-Php</p>
             <Tabs
             defaultActiveKey="Entrantes"
@@ -115,7 +116,7 @@ const Mensajes = ({url, show, usuario, closeSession}) => {
                     }} tipo="salientes"/>
                 </Tab>
                 <Tab className='tab' eventKey="Redactar" title="Redactar">
-                    <Redactar url={url} usuario={usuario} onEnviar={enviarMensaje}/>
+                    <Redactar url={url} usuario={usuario} onEnviar={enviarMensaje} alerta={alerta} setAlerta={setAlerta}/>
                 </Tab>
                 
             </Tabs>
