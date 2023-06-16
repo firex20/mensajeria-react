@@ -19,11 +19,11 @@ const Mensajes = ({url, show, usuario, closeSession}) => {
     let entrantes = mensajes.filter(mensaje => mensaje.remitente.toLowerCase() !== usuario.nombre.toLowerCase());
     let salientes = mensajes.filter(mensaje => mensaje.remitente.toLowerCase() === usuario.nombre.toLowerCase());
 
-    function borrarMensaje (id) {
+    function borrarMensaje (id, user) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({ accion: 'borrarmensaje', id: id })
+            body: JSON.stringify({ accion: 'borrarmensaje', id: id, user: user })
         }
         fetch(url, requestOptions)
                 .then(response => response.json())
@@ -106,12 +106,12 @@ const Mensajes = ({url, show, usuario, closeSession}) => {
             >
                 <Tab className='tab' eventKey="Entrantes" title="Entrantes">
                     <VistaMensajes mensajes={entrantes} onBorrar={function (id) {
-                        borrarMensaje(id);
+                        borrarMensaje(id, usuario.nombre);
                     }} tipo="entrantes"/>
                 </Tab>
                 <Tab className='tab' eventKey="Salientes" title="Salientes">
                     <VistaMensajes mensajes={salientes} onBorrar={function (id) {
-                        borrarMensaje(id);
+                        borrarMensaje(id, usuario.nombre);
                     }} tipo="salientes"/>
                 </Tab>
                 <Tab className='tab' eventKey="Redactar" title="Redactar">
