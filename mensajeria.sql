@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-06-2023 a las 10:00:11
+-- Tiempo de generación: 19-06-2023 a las 10:18:22
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `mensajeria`
 --
+CREATE DATABASE IF NOT EXISTS `mensajeria` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `mensajeria`;
 
 -- --------------------------------------------------------
 
