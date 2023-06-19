@@ -11,7 +11,8 @@ const Identificacion = ({onIdentificar, url, iden, setIden, setSpiner}) => {
     const cerrar = useCallback(() => {
         setIden(false);
         setSpiner(false);
-    },[setIden, setSpiner])
+        setError(false);
+    },[setIden, setSpiner, setError])
 
     const acceder = useCallback(() => {
         let nombre = document.getElementById("nombre").value.toLowerCase();

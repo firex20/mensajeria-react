@@ -118,7 +118,6 @@ const Mensajes = ({url, show, usuario, closeSession}) => {
                 <Tab className='tab' eventKey="Redactar" title="Redactar">
                     <Redactar url={url} usuario={usuario} onEnviar={enviarMensaje} alerta={alerta} setAlerta={setAlerta}/>
                 </Tab>
-                
             </Tabs>
         </div>
                 
