@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Destinatarios from './Destinatarios';
 
 const Redactar = ({url, usuario, onEnviar, alerta, setAlerta}) => {
 
   const [destinatarios, setDestinatarios] = useState([]);
+  const [destqu, setDestqu] = useState(1);
 
   useEffect(() => {
     var user = {
@@ -51,7 +53,7 @@ const Redactar = ({url, usuario, onEnviar, alerta, setAlerta}) => {
       document.getElementById("cuerpo").value = "";
     },[onEnviar, usuario.nombre, setAlerta])
 
-   useEffect(() => {
+    useEffect(() => {
     const keyDownHandler = event => {
       if (event.key === 'Enter' && alerta.visible === false) {
         event.preventDefault();
@@ -66,15 +68,27 @@ const Redactar = ({url, usuario, onEnviar, alerta, setAlerta}) => {
     };
   }, [enviarMensaje, alerta.visible]);  
 
+    const dest_ren = [];
+    for (var i = 0; i < destqu; i++) {
+        dest_ren.push(<Destinatarios key={i} idnum={i} destinatarios={destinatarios}></Destinatarios>)
+    }
+
     return (
       <Form className='redact'>
       <Form.Group controlId="destinatario">
-        <Form.Label>Destinatario</Form.Label>
-        <Form.Select>
-         {destinatarios.map((destinatario, k) => (
-          <option key={k} value={destinatario.nombre}>{destinatario.nombreCompleto}</option>
-         ))}
-        </Form.Select>
+        <Form.Label>Destinatario
+          <Button variant="info" id='adddest' onClick={() => {
+            if (destinatarios.length > destqu){
+              setDestqu(destqu+1)
+            }
+          }}> + </Button>
+          <Button variant="danger" id='restdest' onClick={() => {
+            if (destqu > 1) {
+              setDestqu(destqu-1)
+            }
+          }}> - </Button>
+        </Form.Label>
+        {dest_ren}
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="asunto">

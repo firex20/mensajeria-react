@@ -99,6 +99,24 @@
     margin-top: 6vw;
 }
 
+#adddest {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    margin-left: 5px;
+}
+
+#restdest {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.destinatarios {
+    margin-bottom: 10px;
+}
+
 body {
     background-color: rgb(159, 228, 255);
 }
