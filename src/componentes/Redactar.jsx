@@ -28,30 +28,41 @@ const Redactar = ({url, usuario, onEnviar, alerta, setAlerta}) => {
    }, [usuario, url]);
 
     const enviarMensaje = useCallback(() => {
-      let destinatario = document.getElementById("destinatario").value;
+
       let asunto = document.getElementById("asunto").value;
       let cuerpo = document.getElementById("cuerpo").value;
-      
-      const mensaje = {
-        remitente:usuario.nombre,
-        destinatario: destinatario,
-        asunto: asunto,
-        cuerpo: cuerpo
-      }
+      let i = 0;
+      let repeated_dest = [];
 
-      if (mensaje.asunto !== "") {
-        onEnviar(mensaje);
-      } else {
-        let objAlerta = {
-          visible:true,
-          texto:'Es necesario un asunto para el mensaje.'
+      for (i = 0; i < destqu; i++) {
+        let destinatario = document.getElementById('select'+i).value;
+
+        if (repeated_dest.find(repe => repe === destinatario) === undefined){
+
+          const mensaje = {
+            remitente:usuario.nombre,
+            destinatario: destinatario,
+            asunto: asunto,
+            cuerpo: cuerpo
+          }
+
+          if (mensaje.asunto !== "") {
+            onEnviar(mensaje);
+            repeated_dest.push(destinatario)
+          } else {
+            let objAlerta = {
+              visible:true,
+              texto:'Es necesario un asunto para el mensaje.'
+            }
+            setAlerta(objAlerta);
+            return;
+          }
         }
-        setAlerta(objAlerta);
       }
 
       document.getElementById("asunto").value = "";
       document.getElementById("cuerpo").value = "";
-    },[onEnviar, usuario.nombre, setAlerta])
+    },[onEnviar, usuario.nombre, setAlerta, destqu])
 
     useEffect(() => {
     const keyDownHandler = event => {

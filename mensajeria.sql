@@ -48,7 +48,6 @@ INSERT INTO `mensajes` (`id`, `remitente`, `destinatario`, `asunto`, `cuerpo`, `
 (22, 'ana', 'pepe', 'prueba', 'pruebasa', 3),
 (29, 'ana', 'juan', 'prueba', 'prueba', 3),
 (32, 'ana', 'pepe', 'pruebaaa', 'vgwasfvr', 3),
-(36, 'pepe', 'juan', 'test3', 'rgaaqgav\n', 2),
 (38, 'juan', 'pepe', 'testjuan', 'test de mensaje', 3),
 (39, 'pepe', 'juan', 'Prueba mensaje largo', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', 3),
 (40, 'pepe', 'ana', 'test de pulsar boton', 'test de pulsar el botonsito.', 3),
@@ -66,7 +65,9 @@ INSERT INTO `mensajes` (`id`, `remitente`, `destinatario`, `asunto`, `cuerpo`, `
 (52, 'pepe', 'ana', 'vavqaegqgarv', '', 1),
 (53, 'pepe', 'ana', 'aqrvaqgrg', '', 1),
 (54, 'pepe', 'ana', 'vqaegaav', '', 1),
-(55, 'pepe', 'ana', 'vqaearqrb', '', 1);
+(55, 'pepe', 'ana', 'vqaearqrb', '', 1),
+(56, 'pepe', 'ana', 'Prueba multimensaje', 'jellou ', 3),
+(57, 'pepe', 'juan', 'Prueba multimensaje', 'jellou ', 3);
 
 -- --------------------------------------------------------
 
