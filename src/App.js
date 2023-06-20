@@ -37,7 +37,7 @@ function App() {
       <Identificacion url={phpUrl} onIdentificar={identificar} iden={iden} setIden={setIden} setSpiner={setSpiner}/>
       {!usuario && spiner && <Spinner id="loadingspiner" animation="border" variant="light"/>}
       {usuario && <Mensajes url={phpUrl} show={mensajesVisibles} usuario={usuario} closeSession={closeSession}/>}
-      {!usuario && !spiner && <Button id="initsession" onClick={() =>{setIden(true);setSpiner(true)}}>Iniciar sesión</Button>}
+      {!usuario && !spiner && <><Button id="initsession" onClick={() =>{setIden(true);setSpiner(true)}}>Iniciar sesión</Button><img id="logo" src="logo512.png" alt="Logo!"></img></>}
     </Container>
   );
 }

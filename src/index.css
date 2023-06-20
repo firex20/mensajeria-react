@@ -89,7 +89,14 @@
 
 #initsession {
     margin-left: 30.2vw;
-    margin-top: 10vw;
+    margin-top: 7vw;
+}
+
+#logo {
+
+    float: left;
+    margin-top: 2vw;
+    margin-left: 20vw;
 }
 
 #loadingspiner {
